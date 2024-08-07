@@ -41,9 +41,35 @@ const gameController = (function(){
     }
 
     function getCurrentPlayer(){
-        return currentPlayer;
+        return currentPlayer; /*---------------------enako je spodaj v returnu, tu pustim da vidim kaj funkcija naredi */
     }
     function checkWin(){
-        const /**----------------------------------------------------tukaj naredi checkwin---tukaj si ostal */
+        const winPatterns = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8],               /*three rows */
+            [0, 3, 6], [1, 4, 7], [2, 5, 8],                /*three columns */
+            [0, 4, 8], [2, 4, 6]                   /*two diagonals */
+        ];
+
+
+        const board = gameBoard.getBoard();
+        console.log(board);
+        for (const pattern of winPatterns) {
+            console.log("test")
+            const[a,b,c] = pattern;
+            if ((board[a] === "X" || board[a] === "O" ) && board[a] === board[b] && board[a] === board[c]){
+                console.log("its a win");
+                return getCurrentPlayer();
+                
+            }
+            console.log(board[0]);     
+            }
+            return null;
+        }
+        
+        return{
+            switchTurn,
+            getCurrentPlayer,
+            checkWin
+        }
     }
-})();
+)();
