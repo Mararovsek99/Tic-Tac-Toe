@@ -1,3 +1,7 @@
+const player1 = createPlayer("player1", "X");
+const player2 = createPlayer("player2", "O");
+let currentPlayer = player1;                          /*playerje definiram prej, da lahko dostopam do njih v placeMarker */
+const gameDOM = document.querySelector(".game");
 const gameBoard = (function(){
     const board = ["", "", "", "", "", "", "", "", ""];
 
@@ -5,9 +9,9 @@ const gameBoard = (function(){
         return board;
     }
 
-    function placeMarker(index, marker){
+    function placeMarker(index){
         if (board[index] === ""){
-            board[index] = marker;
+            board[index] = currentPlayer.marker;
         }
     }
 
@@ -29,12 +33,9 @@ function createPlayer(name,marker){
     return {name,marker};
 }
 
-const player1 = createPlayer("player1", "X");
-const player2 = createPlayer("player2", "O");
 
 const gameController = (function(){
 
-    let currentPlayer = player1;
 
     function switchTurn(){
         currentPlayer = currentPlayer === player1 ? player2 : player1;
@@ -73,3 +74,66 @@ const gameController = (function(){
         }
     }
 )();
+const fromArrayToDOM = (function(){
+    array = gameBoard.getBoard();
+    
+ function update(){
+    for (let i = 0; i < array.length; i++) {
+        const childElement = gameDOM.querySelector(".marker" + i);
+        const imgElement = childElement.querySelector("img");
+        const newMarker = document.createElement("img");
+
+
+        if(!imgElement){
+            if(array[i] === "O"){
+            newMarker.src = "photos/O-marker.png";
+            childElement.appendChild(newMarker);
+        }
+        else if(array[i] === "X"){
+            newMarker.src = "photos/X-marker.png";
+            childElement.appendChild(newMarker);
+        }
+        }
+        
+        
+    }
+ }
+    function reset(){
+        for (let i = 0; i < array.length; i++) {
+            const childElement = gameDOM.querySelector(".marker" + i);
+            const imgElement = childElement.querySelector("img");
+
+
+
+        if(imgElement){
+            childElement.removeChild(imgElement);
+        }
+       
+        }
+        
+        
+    }
+ 
+    return{
+        update,
+        reset
+    }
+    
+})();
+
+/*
+  event listener, click (event)
+
+   currentPlace = event.target
+
+   gameBoard.placeMarker(current place);
+
+
+
+
+
+
+
+
+
+*/
