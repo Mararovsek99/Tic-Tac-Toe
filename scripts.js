@@ -2,6 +2,9 @@ const player1 = createPlayer("player1", "X");
 const player2 = createPlayer("player2", "O");
 let currentPlayer = player1;                          /*playerje definiram prej, da lahko dostopam do njih v placeMarker */
 const gameDOM = document.querySelector(".game");
+
+
+
 const gameBoard = (function(){
     const board = ["", "", "", "", "", "", "", "", ""];
 
@@ -12,6 +15,10 @@ const gameBoard = (function(){
     function placeMarker(index){
         if (board[index] === ""){
             board[index] = currentPlayer.marker;
+            return true;
+        }
+        else{
+            return false;
         }
     }
 
@@ -19,6 +26,7 @@ const gameBoard = (function(){
         for (let i = 0; i < board.length; i++) {
             board[i] = "";
         }
+        fromArrayToDOM.reset();
     }
 
     return{                 /*tukaj se hranijo vsi return elementi, saj jih je bolj praktično shranjevati skupaj */
@@ -55,11 +63,10 @@ const gameController = (function(){
         const board = gameBoard.getBoard();
         console.log(board);
         for (const pattern of winPatterns) {
-            console.log("test")
             const[a,b,c] = pattern;
             if ((board[a] === "X" || board[a] === "O" ) && board[a] === board[b] && board[a] === board[c]){
                 console.log("its a win");
-                return getCurrentPlayer();
+                return gameController.getCurrentPlayer();
                 
             }
             console.log(board[0]);     
@@ -121,19 +128,19 @@ const fromArrayToDOM = (function(){
     
 })();
 
-/*
-  event listener, click (event)
+gameDOM.addEventListener("click", function(event){
+    const clickedPlace = event.target;
+    const placeNum = clickedPlace.className[6];
 
-   currentPlace = event.target
+    if(gameBoard.placeMarker(placeNum)){
+        gameController.switchTurn();
+        fromArrayToDOM.update();
 
-   gameBoard.placeMarker(current place);
+            if(gameController.checkWin()){
+                gameBoard.resetBoard();
+            }
 
+    }
+   
 
-
-
-
-
-
-
-
-*/
+})
