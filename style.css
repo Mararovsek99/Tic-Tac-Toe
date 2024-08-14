@@ -22,6 +22,7 @@ body{
     --titlefont: title-font;
     --white: #fffbfb;
     --grey: #f0eef1;
+    --dark-grey: #727272;
     --button-hover: #070505;
     --black: #050505;
     --red: #ff7070;
@@ -93,4 +94,47 @@ footer img {
 }
 footer img:hover{
     transform: rotate(360deg);
+}
+dialog{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: transparent;
+    backdrop-filter: blur(10px);
+}
+dialog > div{
+    font-family: var(--titlefont);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background-color: var(--grey);
+    padding: 30px;
+    border: solid 5px var(--dark-grey);
+    border-radius: 10px;
+}
+dialog > div > *{
+    margin: 10px 0px;
+}
+dialog > div > input{
+    height: 40px;
+    width: 300px;
+    border-radius: 10px;
+    padding: 5px 10px;
+    font-size: var(--button-font);
+}
+dialog > div > button{
+    height: 40px;
+    width: 200px;
+    background-color: var(--light-green);
+    border-radius: 10px;
+    font-size: var(--button-font-size);
+    font-family: var(--titlefont);
 }
