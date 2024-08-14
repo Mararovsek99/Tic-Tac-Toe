@@ -121,7 +121,7 @@ dialog > div{
     border-radius: 10px;
 }
 dialog > div > *{
-    margin: 10px 0px;
+    margin: 15px 0px;
 }
 dialog > div > input{
     height: 40px;
@@ -129,12 +129,18 @@ dialog > div > input{
     border-radius: 10px;
     padding: 5px 10px;
     font-size: var(--button-font);
+    margin-top: 5px;
 }
 dialog > div > button{
-    height: 40px;
+    height: 60px;
     width: 200px;
     background-color: var(--light-green);
     border-radius: 10px;
     font-size: var(--button-font-size);
     font-family: var(--titlefont);
+    cursor: pointer;
+}
+dialog > div > label,
+dialog > div > button{
+    font-size: var(--card-font);
 }

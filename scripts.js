@@ -1,5 +1,34 @@
-const player1 = createPlayer("player1", "X");
-const player2 = createPlayer("player2", "O");
+// let player1Name;
+// let player2Name;
+
+//  const startGameBtn = document.getElementById("startGame");
+
+// startGameBtn.addEventListener("click", function(){
+
+//     const dialog = document.getElementById("startDialog");
+//     let player1Name = document.getElementById("player1").value;
+//     let player2Name = document.getElementById("player2").value; */              rešuj tukaj naprej.........................nujno/*
+
+//     const player1 = createPlayer(player1Name, "X");
+//     const player2 = createPlayer(player2Name, "O");
+//     dialog.close();
+
+// })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 let currentPlayer = player1;                          /*playerje definiram prej, da lahko dostopam do njih v placeMarker */
 const gameDOM = document.querySelector(".game");
 
@@ -16,6 +45,7 @@ const gameBoard = (function(){
         if (board[index] === ""){
             board[index] = currentPlayer.marker;
             return true;
+            console.log(currentPlayer +  " " + currentPlayer.marker);
         }
         else{
             return false;
