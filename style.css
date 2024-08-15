@@ -128,7 +128,7 @@ dialog > div > input{
     width: 300px;
     border-radius: 10px;
     padding: 5px 10px;
-    font-size: var(--button-font);
+    font-family: var(--titlefont);
     margin-top: 5px;
 }
 dialog > div > button{

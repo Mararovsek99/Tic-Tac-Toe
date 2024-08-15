@@ -1,21 +1,19 @@
-// let player1Name;
-// let player2Name;
-
-//  const startGameBtn = document.getElementById("startGame");
-
-// startGameBtn.addEventListener("click", function(){
-
-//     const dialog = document.getElementById("startDialog");
-//     let player1Name = document.getElementById("player1").value;
-//     let player2Name = document.getElementById("player2").value; */              rešuj tukaj naprej.........................nujno/*
-
-//     const player1 = createPlayer(player1Name, "X");
-//     const player2 = createPlayer(player2Name, "O");
-//     dialog.close();
-
-// })
+let player1 = {};
+let player2 = {};
+let currentPlayer; 
+const startGameBtn = document.getElementById("startGame");
 
 
+startGameBtn.addEventListener("click", function(){
+    const dialog = document.getElementById("startDialog");
+    let player1Name = document.getElementById("player1").value;
+    let player2Name = document.getElementById("player2").value;
+    dialog.close();
+    player1 = createPlayer(player1Name, "X");
+    player2 = createPlayer(player2Name, "O");
+    currentPlayer = player1;
+    fromArrayToDOM.updateCurrentPlayer();
+})
 
 
 
@@ -24,16 +22,7 @@
 
 
 
-
-
-
-
-
-let currentPlayer = player1;                          /*playerje definiram prej, da lahko dostopam do njih v placeMarker */
 const gameDOM = document.querySelector(".game");
-
-
-
 const gameBoard = (function(){
     const board = ["", "", "", "", "", "", "", "", ""];
 
@@ -70,6 +59,15 @@ const gameBoard = (function(){
 function createPlayer(name,marker){
     return {name,marker};
 }
+
+
+
+
+
+
+
+
+
 
 
 const gameController = (function(){
@@ -111,6 +109,13 @@ const gameController = (function(){
         }
     }
 )();
+
+
+
+
+
+
+
 const fromArrayToDOM = (function(){
     array = gameBoard.getBoard();
     
@@ -150,13 +155,27 @@ const fromArrayToDOM = (function(){
         
         
     }
- 
+    
+    function updateCurrentPlayer(){
+        const nameText = document.querySelector(".currentPlayerName");
+        playName = gameController.getCurrentPlayer().name;
+        nameText.textContent = `its ${playName}'s turn `;
+    }
     return{
         update,
-        reset
+        reset,
+        updateCurrentPlayer
     }
     
 })();
+
+
+
+
+
+
+
+
 
 gameDOM.addEventListener("click", function(event){
     const clickedPlace = event.target;
@@ -165,6 +184,7 @@ gameDOM.addEventListener("click", function(event){
     if(gameBoard.placeMarker(placeNum)){
         gameController.switchTurn();
         fromArrayToDOM.update();
+        fromArrayToDOM.updateCurrentPlayer();
 
             if(gameController.checkWin()){
                 gameBoard.resetBoard();
