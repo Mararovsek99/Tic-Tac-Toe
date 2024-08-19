@@ -36,7 +36,7 @@ restartGameBtn.addEventListener("click", function(){
     player1Input.value = "";
     const player2Input = document.getElementById("player2");
     player2Input.value = "";
-    
+
     scoreDialog.close();
     dialog.show();
     fromArrayToDOM.updateCurrentPlayer();
@@ -121,7 +121,8 @@ const gameController = (function(){
 
         const board = gameBoard.getBoard();
         console.log(board);
-        for (const pattern of winPatterns) {
+        if(board.some(element => element === "")){
+            for (const pattern of winPatterns) {
             const[a,b,c] = pattern;
             if ((board[a] === "X" || board[a] === "O" ) && board[a] === board[b] && board[a] === board[c]){
                 
@@ -132,6 +133,23 @@ const gameController = (function(){
             console.log(board[0]);     
             }
             return null;
+        }
+        else{
+            const ScoreTitle = document.getElementById("repeatGameTitle");
+            const endScore = document.getElementById("scoreDialog");
+            gameDOM.style.pointerEvents = "none";
+
+            ScoreTitle.textContent = "IT`S A DRAW !";
+            ScoreTitle.style.letterSpacing = "2px";
+            ScoreTitle.style.fontSize = "xx-large";
+
+            setTimeout(function(){
+                endScore.show();
+                gameBoard.resetBoard();
+                gameDOM.style.pointerEvents = "auto";
+            }, 1000);
+        }
+        
         }
         
         return{
@@ -246,11 +264,19 @@ gameDOM.addEventListener("click", function(event){
                 winner = gameController.getCurrentPlayer();
                 winner.score += 1;
                 fromArrayToDOM.updatePlayerNameDOM();
+
+                const ScoreTitle = document.getElementById("repeatGameTitle");
+                ScoreTitle.textContent = `${winner.name} wins !`;
+                ScoreTitle.style.letterSpacing = "2px";
+                ScoreTitle.style.fontSize = "xx-large";
+
                 setTimeout(function(){
                     endScore.show();
                     gameBoard.resetBoard();
                     gameDOM.style.pointerEvents = "auto";
                 }, 1000);
+
+                
 
             }
             else{

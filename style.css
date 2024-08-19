@@ -169,3 +169,43 @@ dialog > div > button{
 .score2{
     color: #1d83d4;
 }
+#repeatGameTitle{
+    text-align: center;
+}
+@media only screen and (max-width: 600px) {
+    
+    dialog > div{
+
+        width: 250px;
+    }
+    dialog > div > h1{
+
+        font-size: large;
+    }
+    dialog > div > input{
+
+        width: 90%;
+    }
+    .game{
+        width: 300px;
+        height: 300px;
+    }
+    .gameBoard{
+        padding: 5px;
+        margin-bottom: 10px;
+    }
+    .game img{
+        width: 80px;
+    }
+    h1{
+        font-size:xx-large;
+    }
+    .score{
+        width: auto;
+    }
+    .score h1{
+        margin-right: 10px;
+    }
+
+
+}
