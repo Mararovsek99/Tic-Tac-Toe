@@ -9,10 +9,13 @@ startGameBtn.addEventListener("click", function(){
     let player1Name = document.getElementById("player1").value;
     let player2Name = document.getElementById("player2").value;
     dialog.close();
-    player1 = createPlayer(player1Name, "X");
-    player2 = createPlayer(player2Name, "O");
+    player1 = createPlayer(player1Name, "X", 0);
+    player2 = createPlayer(player2Name, "O", 0);
     currentPlayer = player1;
     fromArrayToDOM.updateCurrentPlayer();
+    fromArrayToDOM.updatePlayerNameDOM();
+
+
 })
 
 
@@ -56,8 +59,8 @@ const gameBoard = (function(){
 
 })();
 
-function createPlayer(name,marker){
-    return {name,marker};
+function createPlayer(name,marker,score){
+    return {name,marker,score};
 }
 
 
@@ -93,8 +96,9 @@ const gameController = (function(){
         for (const pattern of winPatterns) {
             const[a,b,c] = pattern;
             if ((board[a] === "X" || board[a] === "O" ) && board[a] === board[b] && board[a] === board[c]){
-                console.log("its a win");
+                
                 return gameController.getCurrentPlayer();
+
                 
             }
             console.log(board[0]);     
@@ -161,10 +165,33 @@ const fromArrayToDOM = (function(){
         playName = gameController.getCurrentPlayer().name;
         nameText.textContent = `its ${playName}'s turn `;
     }
+    function updatePlayerNameDOM(){
+        player1Name = document.querySelectorAll(".player1Name");/*----------------------------this updates name1 on DOM  */
+
+        player1Name.forEach(element => {
+            element.textContent = player1.name;
+        });
+        
+        player2Name = document.querySelectorAll(".player2Name");/*-----------------------------this updates name2 on DOM */
+        player2Name.forEach(element => {
+            element.textContent = player2.name;
+        });
+
+        player1Score = document.querySelectorAll(".score1");/*-----------------------------this updates score of first player */
+        player1Score.forEach(element =>{
+            element.textContent = player1.score;
+        });
+
+        player2Score = document.querySelectorAll(".score2");/*--------------------------------this updates the score of second player */
+        player2Score.forEach(element =>{
+            element.textContent = player2.score;
+        });
+    }
     return{
         update,
         reset,
-        updateCurrentPlayer
+        updateCurrentPlayer,
+        updatePlayerNameDOM
     }
     
 })();
@@ -180,14 +207,27 @@ const fromArrayToDOM = (function(){
 gameDOM.addEventListener("click", function(event){
     const clickedPlace = event.target;
     const placeNum = clickedPlace.className[6];
-
+    const endScore = document.getElementById("scoreDialog");
     if(gameBoard.placeMarker(placeNum)){
-        gameController.switchTurn();
+        
         fromArrayToDOM.update();
-        fromArrayToDOM.updateCurrentPlayer();
+        
 
             if(gameController.checkWin()){
-                gameBoard.resetBoard();
+                gameDOM.style.pointerEvents = "none";
+                winner = gameController.getCurrentPlayer();
+                winner.score += 1;
+                fromArrayToDOM.updatePlayerNameDOM();
+                setTimeout(function(){
+                    endScore.show();
+                    gameBoard.resetBoard();
+                    gameDOM.style.pointerEvents = "auto";
+                }, 1000);
+
+            }
+            else{
+                gameController.switchTurn();
+                fromArrayToDOM.updateCurrentPlayer();
             }
 
     }

@@ -144,3 +144,26 @@ dialog > div > label,
 dialog > div > button{
     font-size: var(--card-font);
 }
+.score,
+.scoreMain{
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+}
+.scoreDiv{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+.scoreDiv .scoreMain{
+    font-family: var(--titlefont);
+    width: 250px ;
+    margin: 10px;
+}
+.score1{
+    color: #d43a2f;
+}
+.score2{
+    color: #1d83d4;
+}
