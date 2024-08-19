@@ -130,6 +130,8 @@ dialog > div > input{
     padding: 5px 10px;
     font-family: var(--titlefont);
     margin-top: 5px;
+    text-align: center;
+    font-size: xx-large;
 }
 dialog > div > button{
     height: 60px;

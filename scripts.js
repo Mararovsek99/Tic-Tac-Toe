@@ -2,6 +2,8 @@ let player1 = {};
 let player2 = {};
 let currentPlayer; 
 const startGameBtn = document.getElementById("startGame");
+const secondGameBtn = document.getElementById("startSecondGame");
+const restartGameBtn = document.getElementById("restartGame");
 
 
 startGameBtn.addEventListener("click", function(){
@@ -17,6 +19,32 @@ startGameBtn.addEventListener("click", function(){
 
 
 })
+
+secondGameBtn.addEventListener("click", function(){
+    const scoreDialog = document.getElementById("scoreDialog");
+    scoreDialog.close();
+    fromArrayToDOM.updateCurrentPlayer();
+    fromArrayToDOM.updatePlayerNameDOM();
+
+
+})
+restartGameBtn.addEventListener("click", function(){
+    const dialog = document.getElementById("startDialog");
+    const scoreDialog = document.getElementById("scoreDialog");
+
+    const player1Input = document.getElementById("player1");
+    player1Input.value = "";
+    const player2Input = document.getElementById("player2");
+    player2Input.value = "";
+    
+    scoreDialog.close();
+    dialog.show();
+    fromArrayToDOM.updateCurrentPlayer();
+    fromArrayToDOM.updatePlayerNameDOM();
+
+
+})
+
 
 
 
