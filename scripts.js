@@ -209,7 +209,7 @@ const fromArrayToDOM = (function(){
     function updateCurrentPlayer(){
         const nameText = document.querySelector(".currentPlayerName");
         playName = gameController.getCurrentPlayer().name;
-        nameText.textContent = `its ${playName}'s turn `;
+        nameText.textContent = `it's ${playName}'s turn `;
     }
     function updatePlayerNameDOM(){
         player1Name = document.querySelectorAll(".player1Name");/*----------------------------this updates name1 on DOM  */
