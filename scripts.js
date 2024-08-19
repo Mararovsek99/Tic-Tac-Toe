@@ -275,6 +275,7 @@ gameDOM.addEventListener("click", function(event){
                     gameBoard.resetBoard();
                     gameDOM.style.pointerEvents = "auto";
                 }, 1000);
+                gameController.switchTurn();
 
                 
 
